@@ -1,153 +1,352 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl" class="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#070b13">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#080d17">
 <meta name="description" content="مؤسسة القصاص لتجارة جميع أنواع الإطارات والجنوط - استيراد جديد واستعمال">
-<title>مؤسسة القصاص | الإطارات والجنوط</title>
+<meta name="author" content="مؤسسة القصاص">
+<title>مؤسسة القصاص | عالم الإطارات والجنوط</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body class="theme-dark">
-<div class="site-backdrop" aria-hidden="true"></div>
-<div class="ambient ambient-one" aria-hidden="true"></div>
-<div class="ambient ambient-two" aria-hidden="true"></div>
-
-<!-- واجهة الترحيب عند الدخول -->
-<div id="welcomeModal" class="welcome-shell">
-  <div class="welcome-card glass">
-    <div class="welcome-header">
-      <div class="welcome-icon"><i class="fa-solid fa-car-sharp"></i></div>
-      <h2>مأهلاً بكم في <span>مؤسسة القصاص</span></h2>
-      <p>لتجارة جميع أنواع الإطارات والجنوط (استيراد جديد واستعمال)</p>
-    </div>
-    <button id="enterSiteBtn" class="primary-btn haptic-btn">
-      <span>الدخول للمنصة</span>
-      <i class="fa-solid fa-arrow-left"></i>
-    </button>
-  </div>
+<div class="background-effects">
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+<div class="ambient ambient-3"></div>
+<div class="grid-overlay"></div>
 </div>
 
-<!-- الهيدر العلوي -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="brand">
-      <span class="brand-mark"><i class="fa-solid fa-compact-disc"></i></span>
-      <span class="brand-copy">
-        <strong>مؤسسة القصاص</strong>
-        <small>لتجارة جميع أنواع الإطارات والجنوط (استيراد جديد واستعمال)</small>
-      </span>
-    </div>
-    <div class="header-actions">
-      <button id="themeToggleBtn" class="icon-btn haptic-btn" title="تبديل الوضع">
-        <i class="fa-solid fa-sun" id="themeIcon"></i>
-      </button>
-    </div>
-  </div>
+<!-- شاشة الترحيب -->
+<div class="welcome-screen" id="welcomeModal">
+<div class="welcome-card">
+<div class="welcome-logo"><i class="fa-solid fa-compact-disc"></i></div>
+<span class="welcome-label">WELCOME TO AL-QASSAS</span>
+<h1>مؤسسة <span>القصاص</span></h1>
+<div class="welcome-divider"></div>
+<p>خبرة وثقة في عالم الإطارات والجنوط</p>
+<p class="welcome-subtitle">استيراد جديد واستعمال • جميع المقاسات والأنواع</p>
+<button class="enter-btn" id="enterSiteBtn">
+<span>اكتشف عالم القصاص</span>
+<i class="fa-solid fa-arrow-left"></i>
+</button>
+<div class="welcome-bottom">QUALITY • TRUST • EXPERIENCE</div>
+</div>
+</div>
+
+<!-- الهيدر -->
+<header class="header" id="header">
+<div class="header-container">
+<a href="#" class="brand">
+<div class="brand-icon"><i class="fa-solid fa-compact-disc"></i></div>
+<div class="brand-text">
+<strong>القصاص</strong>
+<span>للإطارات والجنوط</span>
+</div>
+</a>
+<div class="header-center">
+<span class="status-dot"></span>
+<span>الجودة تبدأ من الاختيار الصحيح</span>
+</div>
+<button class="theme-button" id="themeToggleBtn" aria-label="تغيير الوضع">
+<i class="fa-solid fa-sun" id="themeIcon"></i>
+</button>
+</div>
 </header>
 
-<main class="main-container">
-  <!-- قسم التعريف بالإدارة (م/ هشام و م/ ممدوح) -->
-  <section class="leaders-section">
-    <div class="leaders-grid">
-      <!-- المهندس هشام القصاص -->
-      <div class="leader-card glass">
-        <div class="leader-img-frame">
-          <div class="orbit orbit-a"></div>
-          <div class="orbit orbit-b"></div>
-          <div class="leader-img">
-            <img src="https://files.catbox.moe/d2l6sp.png" alt="م/ هشام القصاص">
-          </div>
-        </div>
-        <div class="leader-info">
-          <h3>م/ هشام القصاص</h3>
-          <div class="leader-contacts">
-            <a href="tel:01063328992" class="contact-btn haptic-btn"><i class="fa-solid fa-phone"></i> 01063328992</a>
-            <a href="https://wa.me/201063328992" target="_blank" class="contact-btn wa haptic-btn"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
-            <a href="tel:01200105262" class="contact-btn haptic-btn"><i class="fa-solid fa-phone"></i> 01200105262</a>
-            <a href="https://wa.me/201200105262" target="_blank" class="contact-btn wa haptic-btn"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
-          </div>
-        </div>
-      </div>
+<main>
 
-      <!-- المهندس ممدوح القصاص -->
-      <div class="leader-card glass">
-        <div class="leader-img-frame">
-          <div class="orbit orbit-a"></div>
-          <div class="orbit orbit-b"></div>
-          <div class="leader-img placeholder-avatar">
-            <i class="fa-solid fa-user-gear"></i>
-          </div>
-        </div>
-        <div class="leader-info">
-          <h3>م/ ممدوح القصاص</h3>
-          <div class="leader-contacts">
-            <a href="tel:01011823193" class="contact-btn haptic-btn"><i class="fa-solid fa-phone"></i> 01011823193</a>
-            <a href="https://wa.me/201011823193" target="_blank" class="contact-btn wa haptic-btn"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
-            <a href="tel:01040289250" class="contact-btn haptic-btn"><i class="fa-solid fa-phone"></i> +201040289250</a>
-            <a href="https://wa.me/201040289250" target="_blank" class="contact-btn wa haptic-btn"><i class="fa-brands fa-whatsapp"></i> واتساب</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- الواجهة الرئيسية -->
+<section class="hero">
+<div class="hero-content">
+<div class="hero-badge">
+<span class="badge-line"></span>
+مؤسسة القصاص التجارية
+<span class="badge-line"></span>
+</div>
+<h1>عالم الإطارات<br><span>بمعايير مختلفة</span></h1>
+<p>
+وجهتك الموثوقة لتجارة جميع أنواع الإطارات والجنوط
+<br>
+استيراد جديد واستعمال، تنوع في الاختيارات وثقة في التعامل.
+</p>
+<div class="hero-actions">
+<a href="#management" class="hero-btn primary">
+<i class="fa-solid fa-users"></i>
+تعرف على الإدارة
+</a>
+<a href="#offers" class="hero-btn secondary">
+<i class="fa-solid fa-layer-group"></i>
+استكشف المعرض
+</a>
+</div>
+</div>
+<div class="hero-decoration">
+<div class="hero-ring ring-one"></div>
+<div class="hero-ring ring-two"></div>
+<div class="hero-wheel"><i class="fa-solid fa-compact-disc"></i></div>
+<div class="hero-caption">
+<span>AL-QASSAS</span>
+<small>TIRES & RIMS</small>
+</div>
+</div>
+<div class="hero-bottom">
+<span>01 / 03</span>
+<div></div>
+<span>QUALITY IS OUR IDENTITY</span>
+</div>
+</section>
 
-  <!-- قسم العروض والمعرض -->
-  <section class="offers-section">
-    <div class="section-title">
-      <h2>قسم العروض والمعرض</h2>
-    </div>
+<!-- الإدارة -->
+<section class="management section-container" id="management">
+<div class="section-heading">
+<div class="section-overline">
+<span></span>
+OUR MANAGEMENT
+<span></span>
+</div>
+<h2>إدارة <span>مؤسسة القصاص</span></h2>
+<p>إدارة تسعى لتقديم أفضل تجربة في عالم الإطارات والجنوط.</p>
+</div>
 
-    <div class="offers-grid">
-      <!-- نموذج عرض متاح -->
-      <div class="offer-card glass">
-        <div class="offer-media">
-          <div class="empty-media-box">
-            <i class="fa-solid fa-circle-notch fa-spin"></i>
-            <p>جارٍ رفع الصور/الفيديوهات لهذا العرض قريباً</p>
-          </div>
-        </div>
-        <div class="offer-details">
-          <h3>إطارات استيراد جديد</h3>
-          <div class="offer-specs">
-            <span><strong>النوع:</strong> جديد أصلي</span>
-            <span><strong>المقاس:</strong> متوفر جميع المقاسات</span>
-            <span><strong>السعر والعرض:</strong> اتصل للحصول على خصم العرض</span>
-          </div>
-          <p class="offer-desc">جارٍ رفع صور وفيديوهات هذا العرض قريباً بالتفاصيل كاملة.</p>
-        </div>
-      </div>
+<div class="management-card">
+<div class="management-top">
 
-      <!-- نموذج ثاني لعرض فارغ احترافي -->
-      <div class="offer-card glass">
-        <div class="offer-media">
-          <div class="empty-media-box">
-            <i class="fa-solid fa-compact-disc"></i>
-            <p>جارٍ رفع الصور/الفيديوهات لهذا العرض قريباً</p>
-          </div>
-        </div>
-        <div class="offer-details">
-          <h3>جنوط استيراد استعمال</h3>
-          <div class="offer-specs">
-            <span><strong>النوع:</strong> استعمال ألماني/أوروبي</span>
-            <span><strong>المقاس:</strong> متوفر تشكيلة متنوعة</span>
-            <span><strong>السعر والعرض:</strong> أسعار خاصة للمعرض</span>
-          </div>
-          <p class="offer-desc">جارٍ رفع صور وفيديوهات هذا العرض قريباً بالتفاصيل كاملة.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- المهندس هشام -->
+<div class="manager">
+<div class="manager-photo">
+<img src="https://files.catbox.moe/d2l6sp.png" alt="المهندس هشام القصاص">
+<div class="photo-border"></div>
+</div>
+<div class="manager-details">
+<span class="manager-role">الإدارة</span>
+<h3>م/ هشام القصاص</h3>
+<div class="manager-line"></div>
+<span class="manager-caption">مؤسسة القصاص</span>
+</div>
+</div>
+
+<div class="manager-separator">
+<span></span>
+<i class="fa-solid fa-star"></i>
+<span></span>
+</div>
+
+<!-- المهندس ممدوح -->
+<div class="manager">
+<div class="manager-photo">
+<div class="manager-placeholder">
+<i class="fa-solid fa-user-tie"></i>
+<span>PHOTO</span>
+</div>
+<div class="photo-border"></div>
+</div>
+<div class="manager-details">
+<span class="manager-role">الإدارة</span>
+<h3>م/ ممدوح القصاص</h3>
+<div class="manager-line"></div>
+<span class="manager-caption">مؤسسة القصاص</span>
+</div>
+</div>
+
+</div>
+
+<!-- أرقام التواصل مجمعة -->
+<div class="contact-area">
+<div class="contact-heading">
+<i class="fa-solid fa-headset"></i>
+<div>
+<h4>تواصل معنا مباشرة</h4>
+<span>نحن جاهزون لاستقبال استفساراتكم</span>
+</div>
+</div>
+
+<div class="contact-grid">
+
+<a href="tel:01063328992" class="phone-item">
+<div class="phone-icon"><i class="fa-solid fa-phone"></i></div>
+<div class="phone-info">
+<small>اتصال مباشر</small>
+<strong dir="ltr">01063328992</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="https://wa.me/201063328992" target="_blank" rel="noopener" class="phone-item whatsapp-item">
+<div class="phone-icon"><i class="fa-brands fa-whatsapp"></i></div>
+<div class="phone-info">
+<small>واتساب</small>
+<strong>تواصل عبر واتساب</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="tel:01200105262" class="phone-item">
+<div class="phone-icon"><i class="fa-solid fa-phone"></i></div>
+<div class="phone-info">
+<small>اتصال مباشر</small>
+<strong dir="ltr">01200105262</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="https://wa.me/201200105262" target="_blank" rel="noopener" class="phone-item whatsapp-item">
+<div class="phone-icon"><i class="fa-brands fa-whatsapp"></i></div>
+<div class="phone-info">
+<small>واتساب</small>
+<strong>تواصل عبر واتساب</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="tel:01011823193" class="phone-item">
+<div class="phone-icon"><i class="fa-solid fa-phone"></i></div>
+<div class="phone-info">
+<small>اتصال مباشر</small>
+<strong dir="ltr">01011823193</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="https://wa.me/201011823193" target="_blank" rel="noopener" class="phone-item whatsapp-item">
+<div class="phone-icon"><i class="fa-brands fa-whatsapp"></i></div>
+<div class="phone-info">
+<small>واتساب</small>
+<strong>تواصل عبر واتساب</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="tel:01040289250" class="phone-item">
+<div class="phone-icon"><i class="fa-solid fa-phone"></i></div>
+<div class="phone-info">
+<small>اتصال مباشر</small>
+<strong dir="ltr">01040289250</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+<a href="https://wa.me/201040289250" target="_blank" rel="noopener" class="phone-item whatsapp-item">
+<div class="phone-icon"><i class="fa-brands fa-whatsapp"></i></div>
+<div class="phone-info">
+<small>واتساب</small>
+<strong>تواصل عبر واتساب</strong>
+</div>
+<i class="fa-solid fa-arrow-up-left-from-circle phone-arrow"></i>
+</a>
+
+</div>
+</div>
+</div>
+</section>
+
+<!-- المعرض والعروض -->
+<section class="offers section-container" id="offers">
+<div class="section-heading">
+<div class="section-overline">
+<span></span>
+OUR SHOWROOM
+<span></span>
+</div>
+<h2>العروض <span>والمعرض</span></h2>
+<p>اكتشف عالم الإطارات والجنوط من خلال معرض مؤسسة القصاص.</p>
+</div>
+
+<div class="offers-grid">
+
+<!-- البطاقة الأولى: الصورة -->
+<div class="showroom-card">
+<div class="showroom-image">
+<div class="showroom-placeholder">
+<div class="showroom-icon"><i class="fa-regular fa-images"></i></div>
+<span class="showroom-tag">OUR COLLECTION</span>
+<h3>معرض مؤسسة القصاص</h3>
+<p>مساحة مخصصة لعرض صور المنتجات والعروض المتاحة.</p>
+<div class="upload-indicator">
+<span></span>
+بانتظار إضافة صورة العرض
+</div>
+</div>
+</div>
+<div class="showroom-info">
+<div>
+<h3>الإطارات والجنوط</h3>
+<span>استيراد جديد واستعمال</span>
+</div>
+<div class="showroom-number">01</div>
+</div>
+</div>
+
+<!-- البطاقة الثانية: انتظار العروض -->
+<div class="showroom-card waiting-card">
+<div class="waiting-content">
+<div class="waiting-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+<span class="waiting-label">COMING SOON</span>
+<h3>عروضنا القادمة</h3>
+<p>نعمل على تجهيز مجموعة مميزة من العروض والمنتجات الجديدة.</p>
+<div class="waiting-line">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<div class="waiting-status">
+<i class="fa-solid fa-circle-dot"></i>
+في انتظار تحميل العروض
+</div>
+</div>
+<div class="showroom-info">
+<div>
+<h3>قريباً في المعرض</h3>
+<span>تابع أحدث المنتجات والعروض</span>
+</div>
+<div class="showroom-number">02</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- هوية المؤسسة -->
+<section class="identity-strip">
+<div class="identity-icon"><i class="fa-solid fa-shield-halved"></i></div>
+<div>
+<h3>القصاص... أمانك على الطريق</h3>
+<p>ثقتكم هي أساس نجاحنا واستمرارنا.</p>
+</div>
+<div class="identity-decoration"><i class="fa-solid fa-compact-disc"></i></div>
+</section>
+
 </main>
 
-<footer class="site-footer">
-  <p>جميع الحقوق محفوظة © ٢٠٢٦ مؤسسة القصاص لتجارة الإطارات والجنوط</p>
+<!-- الفوتر -->
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<i class="fa-solid fa-compact-disc"></i>
+<strong>مؤسسة القصاص</strong>
+<span>للإطارات والجنوط</span>
+</div>
+<div class="footer-description">
+لتجارة جميع أنواع الإطارات والجنوط
+<br>
+استيراد جديد واستعمال
+</div>
+<div class="footer-divider"></div>
+<div class="footer-bottom">
+<p>جميع الحقوق محفوظة © <span id="currentYear">2026</span> مؤسسة القصاص</p>
+<span>DESIGNED WITH EXCELLENCE</span>
+</div>
+</div>
 </footer>
+
+<button id="backToTop" class="back-to-top" aria-label="العودة للأعلى">
+<i class="fa-solid fa-arrow-up"></i>
+</button>
 
 <script src="script.js"></script>
 </body>
-</html>
+  </html>
