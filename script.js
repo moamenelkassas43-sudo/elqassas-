@@ -1,12 +1,13 @@
-"use strict";
-
-/* =====================================
-   مؤسسة القصاص - Main JavaScript
-===================================== */
+/* =========================================
+   AL QASSAS — MAIN JAVASCRIPT
+   ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* العناصر الأساسية */
+    /* =====================================
+       ELEMENTS
+    ===================================== */
+
     const welcomeScreen = document.getElementById("welcomeScreen");
     const enterSite = document.getElementById("enterSite");
 
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentYear = document.getElementById("currentYear");
 
     /* =====================================
-       السنة الحالية
+       CURRENT YEAR
     ===================================== */
 
     if (currentYear) {
@@ -28,22 +29,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =====================================
-       شاشة الترحيب
+       WELCOME SCREEN
     ===================================== */
 
     if (welcomeScreen && enterSite) {
 
-        const welcomeSeen = sessionStorage.getItem("alqassasWelcomeSeen");
+        const hasVisited = sessionStorage.getItem("qassasVisited");
 
-        if (welcomeSeen === "true") {
-            welcomeScreen.classList.add("welcome-hidden");
+        if (hasVisited) {
+            welcomeScreen.classList.add("hide");
         }
 
         enterSite.addEventListener("click", () => {
 
-            welcomeScreen.classList.add("welcome-hidden");
+            welcomeScreen.classList.add("hide");
 
-            sessionStorage.setItem("alqassasWelcomeSeen", "true");
+            sessionStorage.setItem("qassasVisited", "true");
 
             document.body.classList.add("site-entered");
 
@@ -52,82 +53,70 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =====================================
-       الوضع الليلي والنهاري
+       THEME SYSTEM
     ===================================== */
 
-    const savedTheme = localStorage.getItem("alqassasTheme");
+    const savedTheme = localStorage.getItem("qassasTheme");
 
-    function setTheme(theme) {
+    function applyTheme(theme) {
 
         document.documentElement.setAttribute("data-theme", theme);
 
-        localStorage.setItem("alqassasTheme", theme);
-
         if (themeIcon) {
-            themeIcon.textContent = theme === "dark" ? "☀" : "☾";
+
+            themeIcon.textContent =
+                theme === "light" ? "☾" : "☼";
+
         }
 
         if (themeToggle) {
+
             themeToggle.setAttribute(
                 "aria-label",
-                theme === "dark" ? "تفعيل الوضع النهاري" : "تفعيل الوضع الليلي"
+                theme === "light"
+                    ? "تفعيل الوضع الليلي"
+                    : "تفعيل الوضع النهاري"
             );
+
         }
+
+        localStorage.setItem("qassasTheme", theme);
 
     }
 
-    const initialTheme =
-        savedTheme === "light" || savedTheme === "dark"
-            ? savedTheme
-            : "dark";
-
-    setTheme(initialTheme);
+    applyTheme(savedTheme === "light" ? "light" : "dark");
 
     if (themeToggle) {
 
         themeToggle.addEventListener("click", () => {
 
             const currentTheme =
-                document.documentElement.getAttribute("data-theme");
+                document.documentElement.getAttribute("data-theme") || "dark";
 
             const newTheme =
                 currentTheme === "dark" ? "light" : "dark";
 
-            setTheme(newTheme);
+            applyTheme(newTheme);
 
         });
 
     }
 
     /* =====================================
-       قائمة الهاتف
+       MOBILE NAVIGATION
     ===================================== */
-
-    function openMobileMenu() {
-
-        if (!mobileNav || !mobileMenuToggle) return;
-
-        mobileNav.classList.add("active");
-        mobileMenuToggle.classList.add("active");
-
-        mobileMenuToggle.setAttribute("aria-expanded", "true");
-        mobileMenuToggle.setAttribute("aria-label", "إغلاق القائمة");
-
-        document.body.classList.add("menu-open");
-
-    }
 
     function closeMobileMenu() {
 
         if (!mobileNav || !mobileMenuToggle) return;
 
-        mobileNav.classList.remove("active");
+        mobileNav.classList.remove("open");
+
         mobileMenuToggle.classList.remove("active");
 
         mobileMenuToggle.setAttribute("aria-expanded", "false");
-        mobileMenuToggle.setAttribute("aria-label", "فتح القائمة");
 
-        document.body.classList.remove("menu-open");
+        mobileMenuToggle.setAttribute("aria-label", "فتح القائمة");
 
     }
 
@@ -135,35 +124,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mobileMenuToggle.addEventListener("click", () => {
 
-            const isOpen = mobileNav.classList.contains("active");
+            const isOpen = mobileNav.classList.toggle("open");
 
-            if (isOpen) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
+            mobileMenuToggle.classList.toggle("active", isOpen);
+
+            mobileMenuToggle.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+            mobileMenuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "إغلاق القائمة" : "فتح القائمة"
+            );
 
         });
 
-        const mobileLinks = mobileNav.querySelectorAll("a");
+        mobileNav.querySelectorAll("a").forEach(link => {
 
-        mobileLinks.forEach(link => {
-
-            link.addEventListener("click", () => {
-                closeMobileMenu();
-            });
+            link.addEventListener("click", closeMobileMenu);
 
         });
 
         document.addEventListener("click", event => {
 
-            const clickedInsideMenu =
-                mobileNav.contains(event.target);
-
-            const clickedToggle =
+            const clickedInside =
+                mobileNav.contains(event.target) ||
                 mobileMenuToggle.contains(event.target);
 
-            if (!clickedInsideMenu && !clickedToggle) {
+            if (!clickedInside) {
                 closeMobileMenu();
             }
 
@@ -179,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.addEventListener("resize", () => {
 
-            if (window.innerWidth > 800) {
+            if (window.innerWidth > 760) {
                 closeMobileMenu();
             }
 
@@ -188,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =====================================
-       تأثير ظهور العناصر عند التمرير
+       SCROLL REVEAL
     ===================================== */
 
     const revealElements = document.querySelectorAll(".reveal");
@@ -213,37 +202,41 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             {
                 threshold: 0.12,
-                rootMargin: "0px 0px -40px 0px"
+                rootMargin: "0px 0px -35px 0px"
             }
         );
 
         revealElements.forEach(element => {
+
             revealObserver.observe(element);
+
         });
 
     } else {
 
         revealElements.forEach(element => {
+
             element.classList.add("visible");
+
         });
 
     }
 
     /* =====================================
-       زر العودة إلى الأعلى
+       BACK TO TOP
     ===================================== */
 
     function handleScroll() {
 
-        const scrollPosition = window.scrollY;
+        if (!backToTop) return;
 
-        if (backToTop) {
+        if (window.scrollY > 450) {
 
-            if (scrollPosition > 450) {
-                backToTop.classList.add("show");
-            } else {
-                backToTop.classList.remove("show");
-            }
+            backToTop.classList.add("show");
+
+        } else {
+
+            backToTop.classList.remove("show");
 
         }
 
@@ -261,9 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             window.scrollTo({
                 top: 0,
-                behavior: window.matchMedia(
-                    "(prefers-reduced-motion: reduce)"
-                ).matches ? "auto" : "smooth"
+                behavior: "smooth"
             });
 
         });
@@ -271,7 +262,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =====================================
-       تمييز رابط القسم الحالي
+       HEADER SCROLL EFFECT
+    ===================================== */
+
+    const header = document.querySelector(".site-header");
+
+    function updateHeader() {
+
+        if (!header) return;
+
+        if (window.scrollY > 30) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
+
+        }
+
+    }
+
+    window.addEventListener("scroll", updateHeader, {
+        passive: true
+    });
+
+    updateHeader();
+
+    /* =====================================
+       ACTIVE NAVIGATION
     ===================================== */
 
     const sections = document.querySelectorAll("main section[id]");
@@ -294,9 +313,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         navigationLinks.forEach(link => {
 
                             const isActive =
-                                link.getAttribute("href") === "#" + sectionId;
+                                link.getAttribute("href") === `#${sectionId}`;
 
-                            link.classList.toggle("active-link", isActive);
+                            link.classList.toggle("active", isActive);
 
                         });
 
@@ -311,52 +330,66 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         sections.forEach(section => {
+
             sectionObserver.observe(section);
+
         });
 
     }
 
     /* =====================================
-       منع الروابط الفارغة من القفز للأعلى
+       IMAGE FALLBACK
     ===================================== */
 
-    document.querySelectorAll('a[href="#"]').forEach(link => {
+    document.querySelectorAll("img").forEach(img => {
+
+        img.addEventListener("error", () => {
+
+            img.classList.add("image-error");
+
+        });
+
+    });
+
+    /* =====================================
+       SMOOTH ANCHOR NAVIGATION
+    ===================================== */
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
 
         link.addEventListener("click", event => {
+
+            const targetId = link.getAttribute("href");
+
+            if (!targetId || targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+
+            if (!target) return;
+
             event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
         });
 
     });
 
     /* =====================================
-       دعم تقليل الحركة
+       CONSOLE BRANDING
     ===================================== */
 
-    const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+    console.log(
+        "%c مؤسسة القصاص ",
+        "background:#0a111d;color:#e0c99b;font-size:18px;font-weight:bold;padding:12px;border:1px solid #c6aa75;"
     );
 
-    if (reducedMotion.matches) {
-
-        document.documentElement.classList.add("reduced-motion");
-
-    }
-
-    reducedMotion.addEventListener?.("change", event => {
-
-        document.documentElement.classList.toggle(
-            "reduced-motion",
-            event.matches
-        );
-
-    });
-
-    /* =====================================
-       جاهزية الموقع
-    ===================================== */
-
-    document.body.classList.add("site-ready");
-
-    console.log("مؤسسة القصاص | الموقع جاهز للعمل");
+    console.log(
+        "%c أمانك على الطريق ",
+        "color:#c6aa75;font-size:13px;font-weight:bold;"
+    );
 
 });
