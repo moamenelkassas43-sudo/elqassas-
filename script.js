@@ -1,213 +1,362 @@
 "use strict";
 
-/* عناصر الموقع */
-const welcomeModal=document.getElementById("welcomeModal");
-const enterSiteBtn=document.getElementById("enterSiteBtn");
-const themeToggleBtn=document.getElementById("themeToggleBtn");
-const themeIcon=document.getElementById("themeIcon");
-const backToTop=document.getElementById("backToTop");
-const currentYear=document.getElementById("currentYear");
+/* =====================================
+   مؤسسة القصاص - Main JavaScript
+===================================== */
 
-/* السنة الحالية */
-if(currentYear){
-currentYear.textContent=new Date().getFullYear();
-}
+document.addEventListener("DOMContentLoaded", () => {
 
-/* شاشة الترحيب */
-function enterWebsite(){
-if(!welcomeModal)return;
-welcomeModal.classList.add("hide");
-try{
-sessionStorage.setItem("qassas_entered","true");
-}catch(error){}
-}
+    /* العناصر الأساسية */
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const enterSite = document.getElementById("enterSite");
 
-let alreadyEntered=false;
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
 
-try{
-alreadyEntered=sessionStorage.getItem("qassas_entered")==="true";
-}catch(error){}
+    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+    const mobileNav = document.getElementById("mobileNav");
 
-if(alreadyEntered&&welcomeModal){
-welcomeModal.classList.add("hide");
-}
+    const backToTop = document.getElementById("backToTop");
+    const currentYear = document.getElementById("currentYear");
 
-if(enterSiteBtn){
-enterSiteBtn.addEventListener("click",enterWebsite);
-}
+    /* =====================================
+       السنة الحالية
+    ===================================== */
 
-/* الوضع الليلي والنهاري */
-function updateThemeIcon(){
-if(!themeIcon)return;
+    if (currentYear) {
+        currentYear.textContent = new Date().getFullYear();
+    }
 
-const isLight=document.body.classList.contains("light-mode");
+    /* =====================================
+       شاشة الترحيب
+    ===================================== */
 
-themeIcon.className=isLight
-?"fa-solid fa-moon"
-:"fa-solid fa-sun";
-}
+    if (welcomeScreen && enterSite) {
 
-function setTheme(theme){
-const isLight=theme==="light";
+        const welcomeSeen = sessionStorage.getItem("alqassasWelcomeSeen");
 
-document.body.classList.toggle("light-mode",isLight);
-document.documentElement.classList.toggle("dark",!isLight);
+        if (welcomeSeen === "true") {
+            welcomeScreen.classList.add("welcome-hidden");
+        }
 
-const themeColor=document.querySelector('meta[name="theme-color"]');
+        enterSite.addEventListener("click", () => {
 
-if(themeColor){
-themeColor.setAttribute(
-"content",
-isLight?"#f4f2ec":"#080d19"
-);
-}
+            welcomeScreen.classList.add("welcome-hidden");
 
-try{
-localStorage.setItem("qassas_theme",theme);
-}catch(error){}
+            sessionStorage.setItem("alqassasWelcomeSeen", "true");
 
-updateThemeIcon();
-}
+            document.body.classList.add("site-entered");
 
-let savedTheme="dark";
+        });
 
-try{
-savedTheme=localStorage.getItem("qassas_theme")||"dark";
-}catch(error){}
+    }
 
-setTheme(savedTheme);
+    /* =====================================
+       الوضع الليلي والنهاري
+    ===================================== */
 
-if(themeToggleBtn){
-themeToggleBtn.addEventListener("click",()=>{
-const isLight=document.body.classList.contains("light-mode");
-setTheme(isLight?"dark":"light");
-});
-}
+    const savedTheme = localStorage.getItem("alqassasTheme");
 
-/* زر العودة للأعلى */
-function updateBackToTop(){
-if(!backToTop)return;
+    function setTheme(theme) {
 
-if(window.scrollY>450){
-backToTop.classList.add("show");
-}else{
-backToTop.classList.remove("show");
-}
-}
+        document.documentElement.setAttribute("data-theme", theme);
 
-window.addEventListener("scroll",updateBackToTop,{passive:true});
+        localStorage.setItem("alqassasTheme", theme);
 
-if(backToTop){
-backToTop.addEventListener("click",()=>{
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-});
-}
+        if (themeIcon) {
+            themeIcon.textContent = theme === "dark" ? "☀" : "☾";
+        }
 
-/* تأثير ظهور العناصر */
-const revealElements=document.querySelectorAll(
-".section-heading,.management-card,.offer-card,.about-content,.identity-box,.contact-card,.feature-item,.contact-intro"
-);
+        if (themeToggle) {
+            themeToggle.setAttribute(
+                "aria-label",
+                theme === "dark" ? "تفعيل الوضع النهاري" : "تفعيل الوضع الليلي"
+            );
+        }
 
-revealElements.forEach(element=>{
-element.classList.add("reveal");
-});
+    }
 
-if("IntersectionObserver" in window){
+    const initialTheme =
+        savedTheme === "light" || savedTheme === "dark"
+            ? savedTheme
+            : "dark";
 
-const observer=new IntersectionObserver((entries,obs)=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("visible");
-obs.unobserve(entry.target);
-}
-});
-},{
-threshold:.12
-});
+    setTheme(initialTheme);
 
-revealElements.forEach(element=>{
-observer.observe(element);
-});
+    if (themeToggle) {
 
-}else{
+        themeToggle.addEventListener("click", () => {
 
-revealElements.forEach(element=>{
-element.classList.add("visible");
-});
+            const currentTheme =
+                document.documentElement.getAttribute("data-theme");
 
-}
+            const newTheme =
+                currentTheme === "dark" ? "light" : "dark";
 
-/* روابط القائمة */
-document.querySelectorAll('.main-nav a').forEach(link=>{
-link.addEventListener("click",()=>{
-document.querySelectorAll('.main-nav a').forEach(item=>{
-item.classList.remove("active");
-});
+            setTheme(newTheme);
 
-link.classList.add("active");
-});
-});
+        });
 
-/* تحديث القائمة حسب القسم الظاهر */
-const sections=document.querySelectorAll("main section[id]");
-const navLinks=document.querySelectorAll(".main-nav a");
+    }
 
-if("IntersectionObserver" in window){
+    /* =====================================
+       قائمة الهاتف
+    ===================================== */
 
-const sectionObserver=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-navLinks.forEach(link=>{
-link.classList.remove("active");
+    function openMobileMenu() {
 
-if(link.getAttribute("href")==="#"+entry.target.id){
-link.classList.add("active");
-}
-});
-}
-});
-},{
-rootMargin:"-30% 0px -60% 0px"
-});
+        if (!mobileNav || !mobileMenuToggle) return;
 
-sections.forEach(section=>{
-sectionObserver.observe(section);
-});
+        mobileNav.classList.add("active");
+        mobileMenuToggle.classList.add("active");
 
-}
+        mobileMenuToggle.setAttribute("aria-expanded", "true");
+        mobileMenuToggle.setAttribute("aria-label", "إغلاق القائمة");
 
-/* تحسين روابط النوافذ الجديدة */
-document.querySelectorAll('a[target="_blank"]').forEach(link=>{
-link.setAttribute("rel","noopener noreferrer");
-});
+        document.body.classList.add("menu-open");
 
-/* إغلاق شاشة الترحيب بزر Escape */
-window.addEventListener("keydown",event=>{
-if(event.key==="Escape"&&welcomeModal){
-enterWebsite();
-}
-});
+    }
 
-/* منع ظهور صور مكسورة */
-document.querySelectorAll("img").forEach(img=>{
-img.addEventListener("error",()=>{
-img.classList.add("image-error");
-});
-});
+    function closeMobileMenu() {
 
-/* تحديث زر العودة عند تحميل الصفحة */
-updateBackToTop();
+        if (!mobileNav || !mobileMenuToggle) return;
 
-/* تأثير بسيط للأزرار على الموبايل */
-document.querySelectorAll("button,.primary-button,.secondary-button").forEach(element=>{
-element.addEventListener("touchstart",()=>{
-element.classList.add("pressed");
-},{passive:true});
+        mobileNav.classList.remove("active");
+        mobileMenuToggle.classList.remove("active");
 
-element.addEventListener("touchend",()=>{
-element.classList.remove("pressed");
-},{passive:true});
+        mobileMenuToggle.setAttribute("aria-expanded", "false");
+        mobileMenuToggle.setAttribute("aria-label", "فتح القائمة");
+
+        document.body.classList.remove("menu-open");
+
+    }
+
+    if (mobileMenuToggle && mobileNav) {
+
+        mobileMenuToggle.addEventListener("click", () => {
+
+            const isOpen = mobileNav.classList.contains("active");
+
+            if (isOpen) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+
+        });
+
+        const mobileLinks = mobileNav.querySelectorAll("a");
+
+        mobileLinks.forEach(link => {
+
+            link.addEventListener("click", () => {
+                closeMobileMenu();
+            });
+
+        });
+
+        document.addEventListener("click", event => {
+
+            const clickedInsideMenu =
+                mobileNav.contains(event.target);
+
+            const clickedToggle =
+                mobileMenuToggle.contains(event.target);
+
+            if (!clickedInsideMenu && !clickedToggle) {
+                closeMobileMenu();
+            }
+
+        });
+
+        document.addEventListener("keydown", event => {
+
+            if (event.key === "Escape") {
+                closeMobileMenu();
+            }
+
+        });
+
+        window.addEventListener("resize", () => {
+
+            if (window.innerWidth > 800) {
+                closeMobileMenu();
+            }
+
+        });
+
+    }
+
+    /* =====================================
+       تأثير ظهور العناصر عند التمرير
+    ===================================== */
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+
+        const revealObserver = new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12,
+                rootMargin: "0px 0px -40px 0px"
+            }
+        );
+
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
+
+    } else {
+
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
+
+    }
+
+    /* =====================================
+       زر العودة إلى الأعلى
+    ===================================== */
+
+    function handleScroll() {
+
+        const scrollPosition = window.scrollY;
+
+        if (backToTop) {
+
+            if (scrollPosition > 450) {
+                backToTop.classList.add("show");
+            } else {
+                backToTop.classList.remove("show");
+            }
+
+        }
+
+    }
+
+    window.addEventListener("scroll", handleScroll, {
+        passive: true
+    });
+
+    handleScroll();
+
+    if (backToTop) {
+
+        backToTop.addEventListener("click", () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                ).matches ? "auto" : "smooth"
+            });
+
+        });
+
+    }
+
+    /* =====================================
+       تمييز رابط القسم الحالي
+    ===================================== */
+
+    const sections = document.querySelectorAll("main section[id]");
+
+    const navigationLinks = document.querySelectorAll(
+        ".main-nav a, .mobile-nav a"
+    );
+
+    if ("IntersectionObserver" in window) {
+
+        const sectionObserver = new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        const sectionId = entry.target.id;
+
+                        navigationLinks.forEach(link => {
+
+                            const isActive =
+                                link.getAttribute("href") === "#" + sectionId;
+
+                            link.classList.toggle("active-link", isActive);
+
+                        });
+
+                    }
+
+                });
+
+            },
+            {
+                rootMargin: "-35% 0px -55% 0px"
+            }
+        );
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+    }
+
+    /* =====================================
+       منع الروابط الفارغة من القفز للأعلى
+    ===================================== */
+
+    document.querySelectorAll('a[href="#"]').forEach(link => {
+
+        link.addEventListener("click", event => {
+            event.preventDefault();
+        });
+
+    });
+
+    /* =====================================
+       دعم تقليل الحركة
+    ===================================== */
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+    if (reducedMotion.matches) {
+
+        document.documentElement.classList.add("reduced-motion");
+
+    }
+
+    reducedMotion.addEventListener?.("change", event => {
+
+        document.documentElement.classList.toggle(
+            "reduced-motion",
+            event.matches
+        );
+
+    });
+
+    /* =====================================
+       جاهزية الموقع
+    ===================================== */
+
+    document.body.classList.add("site-ready");
+
+    console.log("مؤسسة القصاص | الموقع جاهز للعمل");
+
 });
