@@ -1,473 +1,360 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>مؤسسة القصاص | Luxury Automotive</title>
+<title>مؤسسة القصاص | QASSAS</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Alexandria:wght@600;700;800;900&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <style>
+
 :root {
-    --gold: #DCA743;
-    --gold-light: #FFE6A3;
-    --gold-dark: #94601B;
-    --black: #080B10;
-    --white: #FFFFFF;
+--gold: #e8b44f;
+--gold-light: #ffe6a0;
+--black: #080a0e;
+--glass: rgba(255,255,255,.10);
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
 }
 
 body {
-    min-height: 100vh;
-    background:
-        radial-gradient(circle at top, #343b45, #080b10 65%);
-    font-family: 'Cairo', sans-serif;
-    color: white;
-    padding: 25px 12px;
+background: #090c12;
+color: white;
+font-family: 'Cairo', sans-serif;
+padding: 20px;
 }
 
-.control {
-    max-width: 1920px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    padding: 15px;
+button {
+font-family: inherit;
+cursor: pointer;
 }
 
-.control h3 {
-    color: var(--gold-light);
-    font-family: 'Alexandria';
-    font-size: 17px;
+.toolbar {
+max-width: 1400px;
+margin: auto;
+padding: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 15px;
+flex-wrap: wrap;
+}
+
+.toolbar h2 {
+color: var(--gold-light);
+font-family: Alexandria;
 }
 
 .download {
-    padding: 14px 28px;
-    border: 0;
-    border-radius: 10px;
-    background: linear-gradient(
-        120deg,
-        #FFF0C1,
-        #DCA743,
-        #956019
-    );
-    color: #17100A;
-    font-family: 'Cairo';
-    font-size: 16px;
-    font-weight: 900;
-    cursor: pointer;
-    box-shadow: 0 8px 35px #dca74345;
-    transition: .3s;
-}
-
-.download:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 45px #dca74375;
+background: linear-gradient(120deg,#ffe9a9,#d69a32);
+color: #17100a;
+border: none;
+padding: 13px 25px;
+border-radius: 10px;
+font-size: 16px;
+font-weight: 900;
 }
 
 .stage {
-    width: min(100%, 1600px);
-    margin: auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 30px 100px #000;
+width: 100%;
+max-width: 1400px;
+margin: auto;
+overflow: hidden;
+border-radius: 15px;
+box-shadow: 0 20px 80px #000;
 }
 
-/* =================================
-   MAIN CANVAS
-================================= */
-
 #banner {
-    width: 1920px;
-    height: 1080px;
-    position: relative;
-    overflow: hidden;
-    background: #10151B;
-    color: white;
-    isolation: isolate;
-    transform-origin: top left;
+width: 1920px;
+height: 1080px;
+position: relative;
+overflow: hidden;
+background: #10151c;
+transform-origin: top right;
+isolation: isolate;
 }
 
 /* BACKGROUND */
 
 .background {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -5;
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+z-index: -3;
 }
 
 .overlay {
-    position: absolute;
-    inset: 0;
-    z-index: -4;
+position: absolute;
+inset: 0;
+z-index: -2;
 
-    background:
-        linear-gradient(
-            90deg,
-            rgba(3,5,9,.95),
-            rgba(3,5,9,.72) 43%,
-            rgba(3,5,9,.12)
-        ),
-        linear-gradient(
-            0deg,
-            rgba(0,0,0,.96),
-            transparent 60%
-        );
+background:
+linear-gradient(90deg,
+rgba(0,0,0,.95),
+rgba(0,0,0,.75) 48%,
+rgba(0,0,0,.12)),
+linear-gradient(0deg,
+#000 0%,
+transparent 65%);
 }
 
-/* CINEMATIC LIGHT */
-
-.light {
-    position: absolute;
-    width: 1000px;
-    height: 1000px;
-    left: -300px;
-    top: -450px;
-
-    background: radial-gradient(
-        circle,
-        rgba(255,184,79,.28),
-        transparent 68%
-    );
-
-    filter: blur(25px);
-    z-index: -2;
+.gold-light {
+position: absolute;
+width: 900px;
+height: 900px;
+top: -400px;
+left: -200px;
+background: radial-gradient(
+circle,
+rgba(255,180,60,.25),
+transparent 70%
+);
+z-index: -1;
 }
 
-.light2 {
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    right: -200px;
-    bottom: -250px;
+/* FRAME */
 
-    background: radial-gradient(
-        circle,
-        rgba(220,167,67,.17),
-        transparent 70%
-    );
-
-    z-index: -2;
+.frame {
+position: absolute;
+inset: 30px;
+border: 2px solid #dca743;
+border-radius: 25px;
 }
 
-/* BORDER */
-
-.border {
-    position: absolute;
-    inset: 30px;
-    border: 2px solid rgba(220,167,67,.75);
-    border-radius: 26px;
-    pointer-events: none;
-}
-
-.border::before {
-    content: "";
-    position: absolute;
-    inset: 9px;
-    border: 1px solid rgba(255,255,255,.24);
-    border-radius: 18px;
+.frame::after {
+content: "";
+position: absolute;
+inset: 10px;
+border: 1px solid #ffffff35;
+border-radius: 17px;
 }
 
 /* HEADER */
 
 .header {
-    position: absolute;
-    top: 65px;
-    right: 100px;
-    left: 100px;
+position: absolute;
+top: 65px;
+right: 100px;
+left: 100px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .logo {
-    font-family: 'Alexandria';
-    font-size: 34px;
-    font-weight: 900;
-    color: var(--gold-light);
-    letter-spacing: 2px;
-    text-shadow: 0 5px 25px #000;
+font-family: Alexandria;
+font-size: 34px;
+font-weight: 900;
+color: var(--gold-light);
 }
 
 .logo span {
-    color: white;
+color: white;
 }
 
 .badge {
-    padding: 13px 28px;
-    border-radius: 50px;
-
-    border: 1px solid #DCA74399;
-
-    background: rgba(255,255,255,.08);
-    backdrop-filter: blur(20px);
-
-    color: var(--gold-light);
-    font-size: 22px;
-    font-weight: 800;
+padding: 12px 25px;
+border: 1px solid var(--gold);
+border-radius: 50px;
+background: var(--glass);
+backdrop-filter: blur(15px);
+color: var(--gold-light);
+font-size: 22px;
+font-weight: 800;
 }
 
-/* MAIN TITLE */
+/* MAIN */
 
-.main-content {
-    position: absolute;
-    top: 200px;
-    right: 105px;
-    width: 850px;
+.content {
+position: absolute;
+top: 195px;
+right: 105px;
+width: 850px;
 }
 
-.eyebrow {
-    color: var(--gold-light);
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: 2px;
+.kicker {
+font-size: 26px;
+color: var(--gold-light);
+font-weight: 800;
 }
 
 h1 {
-    font-family: 'Alexandria';
-    font-size: 105px;
-    font-weight: 900;
-    line-height: 1.3;
-
-    margin-top: 15px;
-
-    text-shadow: 0 10px 35px #000;
+font-family: Alexandria;
+font-size: 105px;
+font-weight: 900;
+line-height: 1.35;
+margin-top: 15px;
 }
 
 h1 span {
-    display: block;
+display: block;
 
-    background: linear-gradient(
-        110deg,
-        #FFF0C0,
-        #E7B650,
-        #A66B20
-    );
+background: linear-gradient(
+110deg,
+#fff2c6,
+#e8b44f,
+#a66b20
+);
 
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
 }
 
 .subtitle {
-    margin-top: 20px;
-
-    font-size: 37px;
-    font-weight: 900;
-
-    color: var(--gold-light);
+font-size: 36px;
+font-weight: 900;
+color: var(--gold-light);
+margin-top: 20px;
 }
 
 .description {
-    margin-top: 20px;
-
-    font-size: 27px;
-    line-height: 1.9;
-
-    color: #E6E7EA;
-    max-width: 830px;
+font-size: 27px;
+line-height: 1.9;
+color: #e5e5e5;
+margin-top: 20px;
 }
 
-/* SERVICES */
-
 .services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 30px;
+display: flex;
+gap: 15px;
+margin-top: 30px;
+flex-wrap: wrap;
 }
 
 .service {
-    padding: 13px 25px;
-
-    border: 1px solid rgba(255,255,255,.3);
-    border-radius: 50px;
-
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.20),
-        rgba(255,255,255,.035)
-    );
-
-    backdrop-filter: blur(20px);
-
-    font-size: 23px;
-    font-weight: 800;
+padding: 13px 25px;
+border: 1px solid #ffffff50;
+border-radius: 50px;
+background: rgba(255,255,255,.12);
+backdrop-filter: blur(15px);
+font-size: 23px;
+font-weight: 800;
 }
 
-.service strong {
-    color: var(--gold-light);
+.service span {
+color: var(--gold-light);
 }
 
-/* MANAGEMENT CARDS */
+/* MANAGERS */
 
-.management {
-    position: absolute;
-    right: 105px;
-    bottom: 175px;
-
-    display: flex;
-    gap: 22px;
+.managers {
+position: absolute;
+right: 105px;
+bottom: 175px;
+display: flex;
+gap: 20px;
 }
 
-.person {
-    width: 340px;
-    height: 145px;
+.manager {
+width: 340px;
+height: 145px;
+display: flex;
+align-items: center;
+gap: 15px;
+padding: 13px;
 
-    display: flex;
-    align-items: center;
-    gap: 17px;
+border: 1px solid #e8b44f;
+border-radius: 20px;
 
-    padding: 14px;
+background: rgba(255,255,255,.13);
+backdrop-filter: blur(18px);
 
-    border-radius: 20px;
-
-    border: 1px solid rgba(246,196,91,.65);
-
-    background: linear-gradient(
-        135deg,
-        rgba(255,255,255,.23),
-        rgba(255,255,255,.045)
-    );
-
-    backdrop-filter: blur(22px);
-
-    box-shadow: 0 15px 45px #0007;
+box-shadow: 0 15px 40px #0008;
 }
 
-.person img {
-    width: 105px;
-    height: 105px;
-
-    object-fit: cover;
-
-    border-radius: 14px;
-    border: 3px solid var(--gold);
-    background: #252525;
+.manager img {
+width: 105px;
+height: 105px;
+object-fit: cover;
+border: 3px solid var(--gold);
+border-radius: 15px;
+background: #222;
 }
 
-.person small {
-    color: var(--gold-light);
-    font-size: 18px;
-    font-weight: 800;
+.manager small {
+color: var(--gold-light);
+font-size: 18px;
+font-weight: 800;
 }
 
-.person h3 {
-    font-family: 'Cairo';
-    font-size: 25px;
-    font-weight: 900;
-    white-space: nowrap;
+.manager h3 {
+font-size: 24px;
+font-weight: 900;
+white-space: nowrap;
 }
 
 /* FOOTER */
 
 .footer {
-    position: absolute;
-    bottom: 50px;
-    right: 100px;
-    left: 100px;
+position: absolute;
+right: 100px;
+left: 100px;
+bottom: 50px;
 
-    padding-top: 20px;
+border-top: 1px solid #e8b44f;
+padding-top: 20px;
 
-    border-top: 1px solid #DCA74388;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
 .numbers {
-    display: flex;
-    gap: 15px;
-    direction: ltr;
+display: flex;
+gap: 12px;
+direction: ltr;
 }
 
 .number {
-    background: rgba(0,0,0,.65);
-
-    border: 1px solid #ffffff35;
-
-    padding: 12px 18px;
-
-    border-radius: 10px;
-
-    font-family: 'Alexandria';
-    font-size: 24px;
-    font-weight: 800;
+padding: 12px 16px;
+background: #080a0e;
+border: 1px solid #ffffff40;
+border-radius: 10px;
+font-family: Alexandria;
+font-size: 23px;
+font-weight: 800;
 }
 
 .location {
-    color: var(--gold-light);
-    font-size: 27px;
-    font-weight: 900;
+color: var(--gold-light);
+font-size: 27px;
+font-weight: 900;
 }
 
-/* CORNER DECORATION */
-
-.corner {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-color: var(--gold);
-}
-
-.corner.top {
-    top: 30px;
-    right: 30px;
-    border-top: 5px solid;
-    border-right: 5px solid;
-    border-radius: 0 20px 0 0;
-}
-
-.corner.bottom {
-    bottom: 30px;
-    left: 30px;
-    border-bottom: 5px solid;
-    border-left: 5px solid;
-    border-radius: 0 0 0 20px;
-}
+/* RESPONSIVE */
 
 @media(max-width:600px) {
-    body {
-        padding: 8px 4px;
-    }
-
-    .control {
-        justify-content: center;
-    }
-
-    .control h3 {
-        text-align: center;
-    }
+.toolbar {
+justify-content: center;
+text-align: center;
 }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="control">
+<div class="toolbar">
 
-    <h3>AL QASSAS | GLOBAL AUTOMOTIVE CAMPAIGN</h3>
+<h2>AL QASSAS | PREMIUM AUTOMOTIVE</h2>
 
-    <button class="download" id="download">
-        تنزيل البنر بجودة عالية PNG ↓
-    </button>
+<button class="download" id="download">
+تنزيل البنر PNG ↓
+</button>
 
 </div>
 
@@ -475,138 +362,113 @@ h1 span {
 
 <section id="banner">
 
-    <!-- BACKGROUND IMAGE -->
-    <img
-        class="background"
-        crossorigin="anonymous"
-        src="https://files.catbox.moe/ltqv5e.png"
-        alt=""
-    >
+<img
+class="background"
+crossorigin="anonymous"
+src="https://files.catbox.moe/ltqv5e.png"
+alt="خلفية مؤسسة القصاص">
 
-    <div class="overlay"></div>
-    <div class="light"></div>
-    <div class="light2"></div>
+<div class="overlay"></div>
+<div class="gold-light"></div>
+<div class="frame"></div>
 
-    <div class="border"></div>
+<header class="header">
 
-    <div class="corner top"></div>
-    <div class="corner bottom"></div>
+<div class="logo">
+AL QASSAS <span>| القصاص</span>
+</div>
 
-    <!-- HEADER -->
+<div class="badge">
+الجودة • الثقة • الاختيار
+</div>
 
-    <header class="header">
+</header>
 
-        <div class="logo">
-            AL QASSAS <span>| القصاص</span>
-        </div>
+<main class="content">
 
-        <div class="badge">
-            الجودة • الثقة • الاختيار
-        </div>
+<div class="kicker">
+وجهتك الموثوقة لعالم الإطارات والجنوط
+</div>
 
-    </header>
+<h1>
+مؤسسة
+<span>القصاص</span>
+</h1>
 
-    <!-- MAIN CONTENT -->
+<div class="subtitle">
+لتجارة واستيراد جميع أنواع الإطارات
+</div>
 
-    <main class="main-content">
+<div class="description">
+إطارات جديدة ومستعملة، اختيارات متنوعة
+لتلبية احتياجاتك، وثقة تبني علاقة مستمرة.
+</div>
 
-        <div class="eyebrow">
-            وجهتك الموثوقة لعالم الإطارات والجنوط
-        </div>
+<div class="services">
 
-        <h1>
-            مؤسسة
-            <span>القصاص</span>
-        </h1>
+<div class="service">
+<span>إطارات</span> جديدة
+</div>
 
-        <div class="subtitle">
-            لتجارة واستيراد جميع أنواع الإطارات
-        </div>
+<div class="service">
+<span>إطارات</span> مستعملة
+</div>
 
-        <div class="description">
-            عالم من الاختيارات المتنوعة للإطارات الجديدة والمستعملة،
-            مع اهتمام بالتفاصيل وثقة في التعامل.
-        </div>
+<div class="service">
+<span>تجارة</span> واستيراد
+</div>
 
-        <div class="services">
+</div>
 
-            <div class="service">
-                <strong>إطارات</strong> جديدة
-            </div>
+</main>
 
-            <div class="service">
-                <strong>إطارات</strong> مستعملة
-            </div>
+<div class="managers">
 
-            <div class="service">
-                <strong>تجارة</strong> واستيراد
-            </div>
+<div class="manager">
 
-        </div>
+<img
+crossorigin="anonymous"
+src="https://files.catbox.moe/d2l6sp.png"
+alt="م هشام القصاص">
 
-    </main>
+<div>
+<small>الإدارة</small>
+<h3>م/ هشام القصاص</h3>
+</div>
 
-    <!-- MANAGEMENT -->
+</div>
 
-    <div class="management">
+<div class="manager">
 
-        <article class="person">
+<img
+crossorigin="anonymous"
+src="https://files.catbox.moe/pk0oe5.png"
+alt="م ممدوح القصاص">
 
-            <img
-                crossorigin="anonymous"
-                src="https://files.catbox.moe/d2l6sp.png"
-                alt="م. هشام القصاص"
-            >
+<div>
+<small>الإدارة</small>
+<h3>م/ ممدوح القصاص</h3>
+</div>
 
-            <div>
-                <small>الإدارة</small>
-                <h3>م/ هشام القصاص</h3>
-            </div>
+</div>
 
-        </article>
+</div>
 
-        <article class="person">
+<footer class="footer">
 
-            <img
-                crossorigin="anonymous"
-                src="https://files.catbox.moe/pk0oe5.png"
-                alt="م. ممدوح القصاص"
-            >
+<div class="numbers">
 
-            <div>
-                <small>الإدارة</small>
-                <h3>م/ ممدوح القصاص</h3>
-            </div>
+<div class="number">01063328992</div>
+<div class="number">01011823193</div>
+<div class="number">01040289250</div>
 
-        </article>
+</div>
 
-    </div>
+<div class="location">
+كفر الشيخ • سيدي سالم
+</div>
 
-    <!-- CONTACT FOOTER -->
-
-    <footer class="footer">
-
-        <div class="numbers">
-
-            <div class="number">
-                01063328992
-            </div>
-
-            <div class="number">
-                01011823193
-            </div>
-
-            <div class="number">
-                01040289250
-            </div>
-
-        </div>
-
-        <div class="location">
-            كفر الشيخ • سيدي سالم
-        </div>
-
-    </footer>
+</footer>
 
 </section>
 
@@ -619,14 +481,14 @@ const stage = document.getElementById("stage");
 
 function resizeBanner() {
 
-    const scale = Math.min(
-        stage.clientWidth / 1920,
-        1
-    );
+const scale = Math.min(
+stage.clientWidth / 1920,
+1
+);
 
-    banner.style.transform = `scale(${scale})`;
+banner.style.transform = `scale(${scale})`;
 
-    stage.style.height = (1080 * scale) + "px";
+stage.style.height = `${1080 * scale}px`;
 
 }
 
@@ -634,80 +496,71 @@ window.addEventListener("resize", resizeBanner);
 
 resizeBanner();
 
-document.getElementById("download").addEventListener("click", async function() {
+document.getElementById("download").onclick = async function() {
 
-    const button = this;
+const button = this;
 
-    button.disabled = true;
-    button.textContent = "جارٍ تجهيز التصميم...";
+button.disabled = true;
+button.textContent = "جارٍ تجهيز الصورة...";
 
-    try {
+try {
 
-        await Promise.all(
-            [...banner.querySelectorAll("img")].map(img => {
+await Promise.all(
+[...banner.querySelectorAll("img")].map(img => {
 
-                if (img.complete && img.naturalWidth > 0) {
-                    return Promise.resolve();
-                }
+if (img.complete && img.naturalWidth > 0) {
+return Promise.resolve();
+}
 
-                return new Promise((resolve, reject) => {
+return new Promise((resolve, reject) => {
+img.onload = resolve;
+img.onerror = reject;
+});
 
-                    img.onload = resolve;
-                    img.onerror = reject;
+})
+);
 
-                });
+if (typeof html2canvas === "undefined") {
+throw new Error("HTML2Canvas failed to load");
+}
 
-            })
-        );
+const canvas = await html2canvas(banner, {
 
-        const canvas = await html2canvas(banner, {
-
-            width: 1920,
-            height: 1080,
-
-            scale: 1.5,
-
-            useCORS: true,
-            allowTaint: false,
-
-            backgroundColor: "#10151B",
-
-            logging: false
-
-        });
-
-        const link = document.createElement("a");
-
-        link.download = "AL-QASSAS-LUXURY-BANNER.png";
-
-        link.href = canvas.toDataURL("image/png");
-
-        link.click();
-
-        button.textContent = "تم تجهيز البنر ✓";
-
-    }
-
-    catch(error) {
-
-        console.error(error);
-
-        alert(
-            "تعذر تصدير الصورة. تأكد من تحميل الصور واتصال الإنترنت، " +
-            "وقد تكون استضافة الصور تمنع التصدير بسبب إعدادات CORS."
-        );
-
-        button.textContent = "إعادة المحاولة ↓";
-
-    }
-
-    finally {
-
-        button.disabled = false;
-
-    }
+width: 1920,
+height: 1080,
+scale: 1.5,
+useCORS: true,
+allowTaint: false,
+backgroundColor: "#10151c"
 
 });
+
+const link = document.createElement("a");
+
+link.download = "AL-QASSAS-BANNER.png";
+
+link.href = canvas.toDataURL("image/png");
+
+link.click();
+
+button.textContent = "تم التنزيل ✓";
+
+} catch(error) {
+
+console.error(error);
+
+alert(
+"تعذر تنزيل البنر. تحقق من تحميل الصور، " +
+"وقد تمنع استضافة Catbox التصدير بسبب CORS."
+);
+
+button.textContent = "إعادة المحاولة";
+
+}
+
+button.disabled = false;
+
+};
 
 </script>
 
